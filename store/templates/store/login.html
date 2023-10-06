@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #c3e6e6;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            color: #333;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>Welcome Back</h1>
+        <form class="login-form" method="post">
+            {% csrf_token %}
+            <div class="input-container" style="margin-right: 20px;">
+                <div class="username">
+                    <input required class="form-control" type="text" name="username" id="username"
+                        placeholder="Username.." />
+                </div>
+                <div class="password" style="margin-top: 10px;">
+                    <input required class="form-control" type="password" name="password" id="password"
+                        placeholder="Password" />
+                </div>
+                {% if error %}
+                <p class="error" style="color: red;">{{error}}</p>
+                {% endif %}
+            </div>
+            <button type="submit" class="login-btn">Log In</button>
+            <p id="login" style="cursor: pointer;">&#8595; For Guest Checkout</p>
+            <p style="visibility: hidden;" id="details" >
+                <a href="{% url 'store' %}" style="color: black;">Shop as a Guest;</a> We'll handle the rest.
+                <br><br>Simple!
+            </p>
+        </form>
+    </div>
+    <script type="text/javascript">
+        document.getElementById("login").addEventListener("click", function(){
+            document.getElementById("details").style.visibility = "visible";
+        })
+    </script>
+</body>
+
+
+</html>
